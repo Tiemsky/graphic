@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'game_of_squidsregular';
+    src: url('./gameofsquid/gameofsquids-1gmvl-webfont.woff2') format('woff2'),
+         url('./gameofsquid/gameofsquids-1gmvl-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.service_title:hover{ color: #FAB702;}
+
+section, footer {color: #868c96;}
+
+footer p {text-align: center;}
+
+footer img {width: 44px;}
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {.portfolio{display:none}}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {.portfolio{display:none}}
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {.portfolio{display:none}}
+
+.zechamus{
+    font-family: 'game_of_squidsregular';
+}
