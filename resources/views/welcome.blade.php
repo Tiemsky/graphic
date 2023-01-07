@@ -8,7 +8,6 @@
         data-parallax="scroll"
         data-image-src="{{ asset('assets/frontend/images/bg/03.png') }}"
         data-speed=".4">
-
         <div class="container">
         <!-- row -->
           <!-- col -->
@@ -42,7 +41,6 @@
                     <i>{{__('Show less...')}}</i>
                   </a>
                 </div>
-               
               <!-- links container -->
               <div class="links_cont position-relative d-md-flex align-items-center justify-content-start pt-1">
                 <a href="{{ route('catalogue.index') }} " class="theme_btn_sh3 mr-md-2 mb-md-0 mb-2"> {{__('Visit our portfolio')}}
@@ -92,7 +90,7 @@
                   </h5>
                 </a>
                 <p class="mb-0 text-justify">
-                  {{__('Graphic design is the art of creating images through the composition of colors, lines, textures and shapes')}}
+                  {{__('We create graphics including illustrations, logos, layouts and photos. We are experienced in shaping and creating the visual aspects of websites, books, magazines, product packaging, branding and more…')}}
                 </p>
               </div>
             </div>
@@ -139,11 +137,11 @@
                   <img src="{{ asset('assets/frontend/images/icons/youtube.svg') }} " class="icon img-fluid mb-3" alt="icon">
                   <!-- title -->
                   <h5 class="title text-center text-uppercase">
-                    {{__('Video editing')}}
+                    {{__('Video shooting | editing')}}
                   </h5>
                 </a>
                 <p class="mb-0 text-justify">
-                  {{__('Digital marketing is the component of marketing that uses the internet and online digital technologies such as desktops, cell phones and other digital media and platforms to promote products and services.')}}
+                  {{__('We Event, Promotional, Corporate, Industrial, Short Film, Music Video, Commercial, Social Media, advertising, Promo and Trailer.')}}
                 </p>
               </div>
             </div>
@@ -160,7 +158,7 @@
                   </h5>
                 </a>
                 <p class="mb-0 text-justify">
-                  {{__('Our work consists in making you relive in image unforgettable moments thanks to shots and professional photo retouching.')}}
+                  {{__('Our work consists in making you relive in image unforgettable moments by nice shots and professional photo retouching. We do people / product photoshoot indoor and outdoor photography')}}
                 </p>
               </div>
             </div>
@@ -176,7 +174,7 @@
                     {{__('Event Management')}}
                   </h5></a>
                 <p class="mb-0 text-justify">
-                  {{__('')}}
+                  {{__(' Our Role is to convey in image and video all the essential events of your life. Birthday / Wedding / Party / conference and more …')}}
                 </p>
               </div>
             </div>
@@ -213,18 +211,20 @@
           <!-- row -->
           <div class="row">
             <!-- col -->
-            @foreach ($catalogues->portfolios as $catalogue)
-            <div class="col-lg-4 col-md-4 col-sm-4">
-              <!-- box -->
-              <div class="gallery_box lg_box mb-2 d-flex align-items-center justify-content-center"
-                 data-img-url="{{ asset('storage/catalogue/'.$catalogue->name) }}">
-                 <!-- scale button -->
-                 <button type="button" class="scale_btn d-inline-flex align-items-center justify-content-center">
-                   <i class="fa fa-external-link"></i>
-                 </button>
-            </div>
-         </div>
-            @endforeach
+            @isset($catalogues->portfolios)
+              @foreach ($catalogues->portfolios as $catalogue)
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <!-- box -->
+                    <div class="gallery_box lg_box mb-2 d-flex align-items-center justify-content-center"
+                      data-img-url="{{ asset('storage/catalogue/'.$catalogue->name) }}">
+                      <!-- scale button -->
+                      <button type="button" class="scale_btn d-inline-flex align-items-center justify-content-center">
+                        <i class="fa fa-external-link"></i>
+                      </button>
+                    </div>
+                </div>
+              @endforeach
+            @endisset
             
           </div>
         </div>

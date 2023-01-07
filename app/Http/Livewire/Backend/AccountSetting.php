@@ -34,16 +34,20 @@ class AccountSetting extends Component
 
     public function updateProfile(){
         $this->validate(['lastName'=>'required','firstName'=>'required']);
-        return User::where('email',$this->email)->update(['lastName'=>$this->lastName, 'firstName'=>$this->firstName]);
+        User::where('email',$this->email)->update(['lastName'=>$this->lastName, 'firstName'=>$this->firstName]);
+        $this->dispatchBrowserEvent('notification',['type'=>'success','message'=>'Profile information updated successfully!']);
+
     }
 
     public function passwordChange(){
         $this->passwordValidation();
         if(Hash::check($this->currentPassword,Auth::user()->password)){
-            User::where('id',Auth::user()->id)->update(['password'=>$this->newPassword]);
+            User::where('id',Auth::user()->id)->update(['password'=>Hash::make($this->newPassword)]);
         }
         $this->notification='Both password did not match try again!';
-        $this->resetExcept(['passwordError']);return ;
+        $this->resetExcept(['passwordError']);
+        $this->dispatchBrowserEvent('notification',['type'=>'success','message'=>'password updated successfully!']);
+        return ;
 
     }
 
@@ -54,6 +58,8 @@ class AccountSetting extends Component
         $this->dispatchBrowserEvent('openDeleteAccountModal');
     }
 
+
+    //Password validation rules
     private function passwordValidation(){
         return $this->validate([
             'currentPassword'=>'required',
@@ -61,6 +67,7 @@ class AccountSetting extends Component
         ]);
     }
 
+    //updating current user profile picture
     public function uploadPhoto()
     {
         $this->validate([
@@ -69,9 +76,12 @@ class AccountSetting extends Component
         $new_name = $this->renameImage($this->avatar);
         User::where('id', Auth::user()->id)->update(['avatar' => $new_name]);
         $this->emit('photoUpdated');
-
+        $this->dispatchBrowserEvent('notification',['type'=>'success','message'=>'Profile picture updated successfully!']);
+        return;
     }
 
+
+    //Renaming and moving photo in the avatar directory under public folder
     protected function renameImage($image)
     {
         $user=Auth::user();

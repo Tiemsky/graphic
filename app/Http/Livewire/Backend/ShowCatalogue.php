@@ -15,6 +15,9 @@ class ShowCatalogue extends Component
     public $name;
     public $lastInserted;   
 
+   
+
+    //Adding a portfolio to a list
     public function addPortfolio(){
         $catalogue= $this->getCatalogueInfo();
         $this->validate(['image'=>'required|file|mimes:png,jpg,pdf,mp4,mp3|max:102400']);
@@ -28,7 +31,9 @@ class ShowCatalogue extends Component
                 'name'  => $new_name
             ]);
             $this->reset();
-            $this->lastInserted = $lastInserted;    
+            $this->lastInserted = $lastInserted;
+            $this->dispatchBrowserEvent('notification',['type'=>'success','message'=>'Portfolio picture successfully!']);
+            return;
     }
 
     public function delete($id){
@@ -37,26 +42,22 @@ class ShowCatalogue extends Component
             unlink('storage/catalogue/'.$item->name);
         }
         Portfolio::where('id',$id)->delete();
+        $this->dispatchBrowserEvent('notification',['type'=>'success','message'=>'Picture deleted successfully!']);
+        return;
     }
 
 
-
-    public function render()
-    {
-        
-        $catalogue=$this->getCatalogueInfo();
-        return view('livewire.backend.show-catalogue', compact('catalogue'));
-    }
 
     protected function getCatalogueInfo(){
         if($this->lastInserted == null){
             return Catalogue::with(['portfolios'])->where('slug', $this->catalogue_name)->first();
         }
-        
-        return Catalogue::with(['portfolios'])->where('id',$this->lastInserted->catalogue_id)->first();
-         
+        return Catalogue::with(['portfolios'])->where('id',$this->lastInserted->catalogue_id)->first();  
     }
 
-  
-        
+    public function render()
+    {
+        $catalogue=$this->getCatalogueInfo();
+        return view('livewire.backend.show-catalogue', compact('catalogue'));
+    }    
 }

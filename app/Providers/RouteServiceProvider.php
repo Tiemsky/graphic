@@ -17,9 +17,12 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public static function redirectToDashboard(){
-        return redirect('dashboard');
-    }
+    // public static function redirectToDashboard(){
+    //     return  redirect()->route('dashboard');
+    // }
+    
+    public const HOME = '/home';
+   
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

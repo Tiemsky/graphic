@@ -51,6 +51,7 @@
         item_2 = $('#item_2'),
         item_3 = $('#item_3'),
         item_4 = $('#item_4'),
+        item_5 = $('#item_5'),
         bar_1 = $('#bar_1'),
         bar_2 = $('#bar_2'),
         bar_3 = $('#bar_3');
@@ -66,6 +67,7 @@
       item_2.removeClass('anim_item_2').addClass('anim_out_item_2');
       item_3.removeClass('anim_item_3').addClass('anim_out_item_3');
       item_4.removeClass('anim_item_4').addClass('anim_out_item_4');
+      item_5.removeClass('anim_item_5').addClass('anim_out_item_5');
 
     } else {
       bar_1.removeClass('anim_bar_1').addClass('anim_out_bar_1');
@@ -76,6 +78,7 @@
       item_2.removeClass('anim_out_item_2').addClass('anim_item_2');
       item_3.removeClass('anim_out_item_3').addClass('anim_item_3');
       item_4.removeClass('anim_out_item_4').addClass('anim_item_4');
+      item_5.removeClass('anim_out_item_5').addClass('anim_item_5');
 
     }
   });
@@ -88,6 +91,7 @@
         item_2 = $('#item_2'),
         item_3 = $('#item_3'),
         item_4 = $('#item_4'),
+        item_5 = $('#item_5'),
         bar_1 = $('#bar_1'),
         bar_2 = $('#bar_2'),
         bar_3 = $('#bar_3');
@@ -106,6 +110,7 @@
       item_2.removeClass('anim_out_item_2').addClass('anim_item_2');
       item_3.removeClass('anim_out_item_3').addClass('anim_item_3');
       item_4.removeClass('anim_out_item_4').addClass('anim_item_4');
+      item_5.removeClass('anim_out_item_5').addClass('anim_item_5');
 
 
     } else {

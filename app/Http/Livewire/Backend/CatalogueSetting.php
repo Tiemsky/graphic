@@ -41,9 +41,9 @@ class CatalogueSetting extends Component
                 'slug'=>str::slug($this->name)
             ]);
         }
-        
         $this->reset();
         $this->emit('portfolioListUpdated');
+        $this->dispatchBrowserEvent('notification',['type'=>'success','message'=>'Cover created successfully!']);
     }
 
 
@@ -56,7 +56,6 @@ class CatalogueSetting extends Component
             if($catalogue->cover  && $path.'/'.$catalogue->cover){
                 unlink($path.'/'.$catalogue->cover);
             }
-
             $this->validate([
                 'name'=>'required',
                 'cover'=>'required|image|max:10240'
@@ -65,7 +64,6 @@ class CatalogueSetting extends Component
             $getExtension = $this->cover->getClientOriginalExtension();
             $new_name = time().'.'.$getExtension;
             $this->cover->storeAs($path, $new_name);
-
             Catalogue::where('id',$catalogueID)->update([
                 'name'=>$this->name,
                 'cover'=>$new_name,
@@ -82,14 +80,12 @@ class CatalogueSetting extends Component
                 'slug'=>str::slug($this->name),
             ]);
         }
-
         if($this->cover){
             $catalogue = Catalogue::where('id', $catalogueID)->first();
             $path=$this->catalogueCoverFolder;
             if($catalogue->cover  && $path.'/'.$catalogue->cover){
                 unlink($path.'/'.$catalogue->cover);
             }
-
             $this->validate([
                 'cover'=>'required|image|max:10240'
             ]);
@@ -97,22 +93,24 @@ class CatalogueSetting extends Component
             $getExtension = $this->cover->getClientOriginalExtension();
             $new_name = time().'.'.$getExtension;
             $this->cover->storeAs($path, $new_name);
-
             Catalogue::where('id',$catalogueID)->update([
                 'cover'=>$new_name,
             ]);
         }
-
         $this->reset();
         $this->emit('portfolioListUpdated');
-        $this->dispatchBrowserEvent('updated');
+        $this->dispatchBrowserEvent('notification',['type'=>'success','message'=>'Cover updated successfully!']);
+        return;
     }
 
+    //setting what catalogue portfolio of the welcome page
     public function setFrontPagePortfolio($catalogueID){
         if(Catalogue::where('front_page', 1)->first()){
             Catalogue::where('front_page', 1)->update(['front_page'=>0]);
         }
         Catalogue::where('id', $catalogueID)->update(['front_page'=>1]);
+        $this->dispatchBrowserEvent('notification',['type'=>'success','message'=>'Portfolio set successfully!']);
+        return;
     }
 
     public function getCatalogueInfo($id){
@@ -121,6 +119,8 @@ class CatalogueSetting extends Component
         $this->toBeUpdated = $id;
     }
 
+
+    //delete catalogue
     public function delete($id){
         $catalogue = Catalogue::where('id', $id)->first();
         $path=$this->catalogueCoverFolder;
@@ -129,6 +129,8 @@ class CatalogueSetting extends Component
         }
         $catalogue = Catalogue::where('id', $id)->delete();
         $this->emit('portfolioListUpdated');
+        $this->dispatchBrowserEvent('notification',['type'=>'success','message'=>'Catalogue deleted successfully!']);
+
     }
 
 }

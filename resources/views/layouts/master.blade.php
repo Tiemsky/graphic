@@ -17,9 +17,11 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/theme/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/theme/index.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/custom.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
 
     <!-- title -->
     <title> Zechamus </title>
+    @livewireStyles
   </head>
   <body data-spy="scroll" data-target="#scrollspy_bar" data-offset="0">
     <!-- LODAER -->
@@ -38,8 +40,8 @@
       <div class="container">
         <!-- text -->
         <div class="text">
-            <h1 class="mb-2 zechamus"> <i>ZECHAMUS</i> <br>
-                <h5 class="zechamus" style="color: white"> <i>when the charm becomes a behavior</i> </h5>
+            <h1 class="mb-2 zechamus">ZECHAMUS<br>
+                <h5 class="zechamus" style="color: white">when the charm becomes a behavior</h5>
                 <br>
             </h1>
           <!-- space -->
@@ -87,6 +89,13 @@
               {{__('Contact-us')}} 
             </a>
           </li>
+
+          <li class="justify-content-center align-items-center" id='item_5'>
+            <a href='{{ route('contact-us') }} ' class="d-block position-relative text-uppercase text-center"
+            data-content='Discover'>
+            {{__('check')}} 
+          </a>
+        </li>
         </ul>
       </nav>
     </div>
@@ -132,8 +141,6 @@
         <!-- item -->
         <div class="item d-inline-flex align-items-center justify-content-center" data-color="green">
             <i class="fa fa-tint"></i>
-
-
         </div>
         </div>
     </div>
@@ -165,5 +172,31 @@
     <script defer src="{{ asset('assets/frontend/js/vendors/parallax.min.js') }}"></script>
     <script defer src="{{ asset('assets/frontend/js/vendors/slick.min.js') }}"></script>
     <script defer src="{{ asset('assets/frontend/js/theme/script.js') }}"></script>
+    @livewireScripts
+
+    <script src="{{ asset('assets/backend/vendor/libs/jquery/jquery.js') }} "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+      window.addEventListener('notification', param => {
+        toastr[param.detail['type']](param.detail['message'])
+        toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "linear",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+}
+      });
+    </script>
   </body>
 </html>

@@ -18,7 +18,22 @@
                                  Add user
                                 </a>
                             </li>
+
+                           @if (Auth::user()->role >= 1)
+                            <li class="nav-item">
+                                <a type="button"
+                                class="nav-link btn-outline-info"
+                                wire:click.prevent="toggleRegistration">
+                                <i class="bx bxs-key me-1"></i>
+                                Enable Registration
+                                </a>
+                            </li>
+                           @endif
+
                         </ul>
+                        <div>
+                          <span><i>Registration status: </i></span><span><i><strong class="{{$registration->is_registration_enabled ==true ? 'text-success': ''}}">{{$registration->is_registration_enabled ==1 ? 'On': 'Off'}}</strong></i></span>
+                        </div>
                     </div>
                 </div>
 
@@ -54,22 +69,15 @@
                           </td>
                           <td>{{ $user->email }} </td>
                           <td>
-                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                              <li
-                                data-bs-toggle="tooltip"
-                                data-popup="tooltip-custom"
-                                data-bs-placement="top"
-                                class="avatar avatar-xs pull-up"
-                                title="Lilian Fuller"
-                              >
-                                {{ $user->role == 1 ? 'admin':'user' }}
-                              </li>
-
-                            </ul>
+                          
+                              <i class="fab fa-bootstrap fa-lg text-primary me-3"></i>
+                              {{ $user->role == 1 ? 'Adminstrator':'User' }}
+                          
+          
                           </td>
                             <td>
-                                <span class="badge bg-label-{{ $user->status == 0 ? 'warning': 'success' }} me-1">
-                                    {{ $user->status == 0 ? 'PENDING': 'ACTIVE' }}
+                                <span class="badge bg-label-{{ $user->email_verified_at ? 'success':'warning'}} me-1">
+                                    {{ $user->email_verified_at ? 'ACTIVE': 'PENDING' }}
                                 </span>
                             </td>
                           <td>
@@ -229,11 +237,12 @@
                 </div>
             </div>
         </div>
+        <script>
+          window.addEventListener('closeModal', event => {
+              $('#backDropModal').modal('hide')
+              $('#deleteUserModal').modal('hide')
+          })
+          </script>
 
-<script>
-    window.addEventListener('closeModal', event => {
-        $('#backDropModal').modal('hide')
-        $('#deleteUserModal').modal('hide')
-    })
-    </script>
 </div>
+

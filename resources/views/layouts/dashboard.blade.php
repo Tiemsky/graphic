@@ -13,11 +13,8 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
         />
-
-    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
-
+    <title>Dashboard - Zechamus</title>
     <meta name="description" content="" />
-
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/backend/img/favicon/favicon.ico') }} " />
 
@@ -28,28 +25,13 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet"
         />
-
-    <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="{{ asset('assets/backend/vendor/fonts/boxicons.css') }} " />
-
-    <!-- Core CSS -->
     <link rel="stylesheet" href="{{ asset('assets/backend/vendor/css/core.css') }} " class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{ asset('assets/backend/vendor/css/theme-default.css') }} " class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('assets/backend/css/demo.css') }} " />
-
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/backend/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }} " />
-
-    <link rel="stylesheet" href="{{ asset('assets/backend/vendor/libs/apex-charts/apex-charts.css') }} " />
-
-    <!-- Page CSS -->
-
-    <!-- Helpers -->
-    <script src="{{ asset('assets/backend/vendor/js/helpers.js') }} "></script>
-
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="{{ asset('assets/backend/js/config.js') }} "></script>
+    <link rel="stylesheet" href="{{ asset('assets/backend/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+    
     @livewireStyles
   </head>
   <body>
@@ -168,20 +150,6 @@
               </ul>
             </li>
 
-            {{-- <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Services</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="{{ route('service-setting') }} " class="menu-link">
-                    <div data-i18n="Account">Settings</div>
-                  </a>
-                </li>
-              </ul>
-            </li> --}}
-
             <li class="menu-item {{request()->segment(1) == 'catalogue-setting' ? 'active open': ''}}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bxs-photo-album"></i>
@@ -261,7 +229,9 @@
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
-
+   
+    <script src="{{ asset('assets/backend/vendor/js/helpers.js') }} "></script>
+    <script src="{{ asset('assets/backend/js/config.js') }} "></script>
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script defer src="{{ asset('assets/backend/vendor/libs/jquery/jquery.js') }} "></script>
@@ -271,11 +241,34 @@
     <script defer src="{{ asset('assets/backend/vendor/js/menu.js') }} "></script>
     <!-- endbuild -->
     <!-- Vendors JS -->
-    <script defer src="{{ asset('assets/backend/vendor/libs/apex-charts/apexcharts.js') }} "></script>
     <!-- Main JS -->
     <script defer src="{{ asset('assets/backend/js/main.js') }} "></script>
     <!-- Page JS -->
-    <script  src="{{ asset('assets/backend/js/ui-toasts.js') }} "></script>
     @livewireScripts
+
+    <script src="{{ asset('assets/backend/vendor/libs/jquery/jquery.js') }} "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+      window.addEventListener('notification', param => {
+        toastr[param.detail['type']](param.detail['message'])
+        toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "linear",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+}
+      });
+    </script>
   </body>
 </html>
