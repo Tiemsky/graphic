@@ -34,7 +34,12 @@ class ContactForm extends Component
 
     public function toggleTypeOfUser($index){
         $this->selectedUserType = ($this->typeOfUsers[$index]);
-        $this->is_company =!$this->is_company;
+        if($index == 2 && $this->is_company ==false ){
+            $this->is_company=true;
+        }
+        if($index != 2){
+            $this->is_company=false;
+        }
     }
 
     public function sendData(){
